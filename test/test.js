@@ -33,7 +33,9 @@ describe('server', function() {
 
         // Create or clear the file.
         var fd = fs.openSync(fixturePath, 'w');
+        //console.log("fd:", fd);
         fs.writeSync(fd, 'google');
+        //console.log("fs:", fs);
         fs.closeSync(fd);
 
         // Write data to the file.

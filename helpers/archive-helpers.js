@@ -55,16 +55,9 @@ exports.addUrlToList = function(url, callback) {
 };
 
 exports.isUrlArchived = function(url, callback) {
-  // this.path.exists(this.paths.archivedSites, function(exists) { 
-  //   if (url === exists) { 
-  //     console.log("inside:", exists);
-  //     callback(url===exists);
-  //     }
-  // }); 
   var string = this.paths.archivedSites + "/" + url;
-  
   fs.stat(string, function(err, stat) {
-    if(err == null ) {
+    if(err === null ) {
         console.log('File exists');
         callback(true);
     } else {
