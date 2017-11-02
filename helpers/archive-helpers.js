@@ -46,13 +46,35 @@ exports.isUrlInList = function(url, callback) {
 };
 
 exports.addUrlToList = function(url, callback) {
-
-
+  fs.appendFile(this.paths.list, url, function (err) {
+    if (err) { callback(err); }
+    callback();          
+    
+  });
 
 };
 
 exports.isUrlArchived = function(url, callback) {
-};
+  // this.path.exists(this.paths.archivedSites, function(exists) { 
+  //   if (url === exists) { 
+  //     console.log("inside:", exists);
+  //     callback(url===exists);
+  //     }
+  // }); 
+  var string = this.paths.archivedSites + "/" + url;
+  
+  fs.stat(string, function(err, stat) {
+    if(err == null ) {
+        console.log('File exists');
+        callback(true);
+    } else {
+        console.log('Some other error: ', err.code);
+        callback(false);
+    }
+});
+
+}; 
+
 
 exports.downloadUrls = function(urls) {
 };
