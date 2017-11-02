@@ -4,11 +4,6 @@ var fs = require('fs');
 // require more modules/folders here!
 
 exports.handleRequest = function (req, res) {
-  console.log('==================================', req.url)
-  // res.end(archive.paths.list);
-  //console.log('url:', req.url);
-  //var isExist = false;
-
 
   //GET
   if (req.url === '/' && req.method === 'GET') {
@@ -39,17 +34,21 @@ exports.handleRequest = function (req, res) {
       archive.isUrlArchived(chunkData, function(isArchived) {
       // If exsist in archive folder
         if (isArchived) {
-        //Read file and send as request
+          console.log(chunkData, ' IS archived');
+          //Read file and send as request
           fs.readFile(archive.paths.archivedSites + '/' + chunkData, function(err, data) {
-            if ( err ) { throw err; }
+            if ( err ) { console.log(err); }
+            console.log('sending', archive.paths.archivedSites + '/' + chunkData);
             res.end(data);
           });
         //Does not exsist in archive folder
         } else {
-          //Check if url exsists in sites list
+          //Check if chunkData exsists in sites list
+          console.log(chunkData, ' is NOT archived');
           archive.isUrlInList(chunkData, function(data) {
             //if does exsist in list, send loading html page
             if (data) {
+              console.log(chunkData, ' is in the list');
               fs.readFile( archive.paths.siteAssets + '/loading.html', function(err, data) {
                 //console.log('====',data);
                 if (err) {
@@ -60,12 +59,14 @@ exports.handleRequest = function (req, res) {
             //if doesn't exsist, add to list
             } else {
               //add to list and then send loading html page
+              console.log(chunkData, ' is not in the list, adding to list');
               archive.addUrlToList(chunkData, function() {
                 fs.readFile( archive.paths.siteAssets + '/loading.html', function(err, data) {
                   //console.log('====',data);
                   if (err) {
                     throw err;
                   }    
+                  console.log('added', chunkData, 'to list');
                   res.end(data);  
                 });
               });
