@@ -4,6 +4,8 @@ var initialize = require('./initialize.js');
 
 // Why do you think we have this here?
 // HINT: It has to do with what's in .gitignore
+
+
 initialize('./archives');
 
 var port = 8080;
@@ -17,7 +19,4 @@ if (module.parent) {
   console.log('Listening on http://' + ip + ':' + port);
 }
 
-  // this.readListOfUrls(function(data) {
-  // var old = JSON.parse(buffer.toString('utf-8'));
-    
-  // })
+ 

@@ -27,36 +27,22 @@ exports.initialize = function(pathsObj) {
 
 exports.readListOfUrls = function(callback) {
 //returns array of urls 
-  var array = [];  
-  var url;
+
   fs.readFile(this.paths.list,'utf-8', function(err, data) {
     //console.log('====',data);
     if (err) {
       throw err;
     }    
-    url = data.split('\n');
-    url.forEach(function(el){
-      console.log("++", el);
-      array.push(el);
-    });
-  
-  
-    callback(array);
+    callback(data.split('\n'));
   });
 };
 
 exports.isUrlInList = function(url, callback) {
-//return bool value if url is in list 
 
+// console.log("---",url);  
   this.readListOfUrls(function(data){
-    //console.log('+++++++++++++++=',data.toString('utf-8'));
-    var array = data.toString('utf-8').split("\n");
-    console.log('@@@@@@@@@@@@', url, array.includes(url))
-    console.log('++++++++++++++++',array);
- 
-    return array.includes(url);
+    callback(data.includes(url));
   });
-  
 };
 
 exports.addUrlToList = function(url, callback) {
@@ -70,3 +56,17 @@ exports.isUrlArchived = function(url, callback) {
 
 exports.downloadUrls = function(urls) {
 };
+
+
+
+
+
+  // this.readListOfUrls(function(data){
+  //   //console.log('+++++++++++++++=',data.toString('utf-8'));
+  //   // var array = data.toString('utf-8').split("\n");
+  //   // console.log('@@@@@@@@@@@@', url, array.includes(url));
+  //   // console.log('++++++++++++++++',array);
+ 
+  //   // return array.includes(url);
+
+  // });
