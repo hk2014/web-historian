@@ -17,3 +17,7 @@ if (module.parent) {
   console.log('Listening on http://' + ip + ':' + port);
 }
 
+  // this.readListOfUrls(function(data) {
+  // var old = JSON.parse(buffer.toString('utf-8'));
+    
+  // })
