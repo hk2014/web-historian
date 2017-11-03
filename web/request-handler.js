@@ -37,9 +37,12 @@ exports.handleRequest = function (req, res) {
           console.log(chunkData, ' IS archived');
           //Read file and send as request
           fs.readFile(archive.paths.archivedSites + '/' + chunkData, function(err, data) {
-            if ( err ) { console.log(err); }
-            console.log('sending', archive.paths.archivedSites + '/' + chunkData);
-            res.end(data);
+            if ( err ) {
+              console.log('40', err); 
+            } else {
+              console.log('sending', archive.paths.archivedSites + '/' + chunkData);
+              res.end(data);
+            }
           });
         //Does not exsist in archive folder
         } else {
@@ -52,9 +55,10 @@ exports.handleRequest = function (req, res) {
               fs.readFile( archive.paths.siteAssets + '/loading.html', function(err, data) {
                 //console.log('====',data);
                 if (err) {
-                  throw err;
-                }    
-                res.end(data);  
+                  console.log('55', err)
+                } else {
+                res.end(data);
+               } 
               });
             //if doesn't exsist, add to list
             } else {
@@ -64,10 +68,11 @@ exports.handleRequest = function (req, res) {
                 fs.readFile( archive.paths.siteAssets + '/loading.html', function(err, data) {
                   //console.log('====',data);
                   if (err) {
-                    throw err;
-                  }    
-                  console.log('added', chunkData, 'to list');
-                  res.end(data);  
+                    console.log('67', err);
+                  } else {
+                    console.log('added', chunkData, 'to list');
+                    res.end(data); 
+                  } 
                 });
               });
             }
