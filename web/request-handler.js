@@ -55,7 +55,7 @@ exports.handleRequest = function (req, res) {
               fs.readFile( archive.paths.siteAssets + '/loading.html', function(err, data) {
                 //console.log('====',data);
                 if (err) {
-                  console.log('55', err)
+                  console.log('55', err);
                 } else {
                 res.end(data);
                } 
@@ -111,5 +111,6 @@ exports.handleRequest = function (req, res) {
 //     });
 //   } 
 };
+
 
   
